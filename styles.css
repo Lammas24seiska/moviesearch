@@ -18,6 +18,7 @@ header, main, footer {
 }
 
 header {
+    position: relative;
     background-color: #3498db;
     padding: 10px 20px;
     height: 50px;
@@ -25,32 +26,37 @@ header {
     flex-direction: row;
     gap: 50px;
     align-items: center;
-    justify-content: space-between;
+    justify-content: center;
 }
 
 header h1 {
+    position: absolute;
+    left: 20px;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
     min-width: 0;
     flex-shrink: 0;
+    flex-grow: 0;
 }
 
-header form {
-    width: fit-content;;
+#search-form {
+    margin-left: 165px;
+    max-width: 1000px;
+    width: fit-content;
     display: flex;
     flex-direction: row;
-    justify-content: center;
+    justify-content: space-around;
     align-items: center;
     gap: 15px;
     flex-wrap: nowrap;
     overflow: hidden;
+    flex-grow: 1;
 }
 
 .search-bar {
-    flex-grow: 1;
     height: 40px;
-    max-width: 400px;
+    max-width: 800px;
     display: flex;
     align-items: center;
     border: 1px solid #525557;
@@ -58,6 +64,7 @@ header form {
     border-radius: 20px;
     padding: 10px 20px 10px 0px;
     min-width: 275px;
+    flex-grow: 4;
 }
 
 .search-bar select {
@@ -85,7 +92,6 @@ header form {
     background: rgb(119, 212, 119);
     color: #000000;
 }
-
 
 .search-bar input {
     background: transparent;
@@ -116,7 +122,6 @@ header form {
     background: transparent;
 }
 
-header form #filter-button,
 header form select {
     flex-shrink: 0;
     height: 40px;
@@ -133,12 +138,18 @@ header form select {
     text-align: center;
     outline: none;
     transition: background-color 0.3s ease, color 0.3s ease;
+    flex-grow: 0;
 }
 
-header form #filter-button:hover,
 header form select:hover {
     background-color: #3498db;
     color: #ffffff;
+}
+
+#search-options {
+    display: flex;
+    flex-direction: row;
+    gap: 15px;
 }
 
 #language option img {
@@ -179,7 +190,7 @@ main {
 #main-header {
     display: flex;
     flex-direction: row;
-    flex-wrap: wrap;
+    flex-wrap: wrap-reverse;
     justify-content: space-between;
     align-items: center;
     padding: 10px 20px;
@@ -259,7 +270,7 @@ main h2 {
     padding: 0;
 }
 
-.result button {
+button.add-favorite {
     border-radius: 25%;
     width:30px;
     height: 30px;
@@ -277,12 +288,12 @@ main h2 {
     transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
-.result button:hover {
+button.add-favorite:hover {
     background-color: #2980b9;
     transform: scale(1.1);
 }
 
-.result button:active {
+button.add-favorite:active {
     transform: scale(0.95);
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
 }
@@ -316,12 +327,171 @@ footer {
     color: #ffffff;
 }
 
+#movie-detail-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%; 
+    background-color: rgba(0, 0, 0, 0.9);
+    display: hidden;
+    align-items: center;
+    justify-content: center;
+    visibility: hidden; 
+    opacity: 0;
+    transition: visibility 0s, opacity 0.3s ease;
+}
+
+#movie-detail-overlay.active {
+    visibility: visible;
+    opacity: 1;
+    display: flex;
+}
+
+.overlay-card {
+    background-color: rgb(194, 194, 194);
+    width: 60%;
+    height: 60%;
+    min-width: 490px;
+    border-radius: 5px;
+    overflow: auto;
+    position: relative;
+}
+
+.overlay-card .close-button {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background-color: transparent;
+    color: #000000;
+    font-weight: bold;
+    font-size: 20px;
+    font-family: monospace;
+    border: none;
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#movie-details {
+    display: grid;
+    grid-template-columns: 300px 1fr 1fr;
+    grid-template-rows: 90px 132px 192px 100px;
+    gap: 10px;
+    padding: 10px;
+}
+
+#movie-details .poster-div {
+    grid-column: 1;
+    grid-row: 1 / 4;
+    position: relative;
+    height: fit-content;
+    width: fit-content;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#movie-details .poster-div img {
+    width: auto;
+    height: 100%;
+}
+
+#movie-details .poster-div button.add-favorite {
+    top: 10px;
+    left: 10px;
+}
+
+#movie-details .poster-div .rating-box {
+    height: 30px;
+    width: 70px;
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    background-color: rgba(156, 156, 156, 0.7);
+    border:rgb(0, 0, 0) solid 2px;
+    color: #000000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+#movie-details .title-div {
+    grid-column: 2 / 4;
+    grid-row: 1;
+}
+
+#movie-details .title-div .movie-genre,
+#movie-details .title-div .movie-title {
+    margin: 5px;
+}
+
+#movie-details .title-div h2 small {
+    font-size: 0.7em;
+    font-style: italic;
+    color: #2c3e50;
+}
+
+#movie-details .plot {
+    grid-column: 2 / 4;
+    grid-row: 2; 
+    margin: 0;
+    display: -webkit-box;
+    -webkit-line-clamp: 11;
+    line-clamp: 11;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-size: 11px;
+}
+
+#movie-details .cast-info {
+    grid-column: 2;
+    grid-row: 3 / 5;
+}
+
+#movie-details .cast-info p, #movie-details .cast-info ul {
+    margin: 5px;
+}
+
+#movie-details .num-info {
+    grid-column: 3;
+    grid-row: 3 / 5;
+}
+
+#movie-details .num-info p, #movie-details .num-info strong {
+    margin: 5px;
+}
+
+#movie-details .rating-info {
+    grid-column: 1;
+    grid-row: 4;
+}
+
+#movie-details .rating-info p, #movie-details .rating-info ul {
+    margin: 5px;
+}
+
+path {
+    fill: rgb(0, 0, 0);
+}
+
+path.filled {
+    fill: yellow;
+}
+
 @media all and (max-width: 882px) {
     header {
         flex-direction: column;
         align-items: flex-start;
         gap: 0px;
-        height: 100px;;
+        height: 100px;
     }
 
     main {
@@ -329,33 +499,53 @@ footer {
     }
 
     header h1 {
+        position: static;
         width: 100%;
         text-align: center;
         margin: 0;
     }
 
-    header form {
+    #search-form {
+        margin-left: 0;
         width: 100%;
         display: flex;
         flex-direction: row;
-        justify-content: flex-start;
+        justify-content: space-between;
         align-items: center;
         gap: 10px;
+        flex-shrink: 4;
     }
 
-    @media all and (max-width: 560px) {
-        #results-container {
-            width: min-content;
-            margin: 0 auto;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-        }
+    .search-bar {
+        flex-shrink: 1;
+    }
+}
 
-        #search-form {
-            flex-wrap: wrap;
-            justify-content: center;
-        }
+@media all and (max-width: 690px) {
+    main {
+        height: calc(100vh - 230px);
+    }
+    
+    header {
+        height: 170px;
+        flex-direction: column;
+        gap: 10px;
+        align-items: center;
+        justify-content: center;
+    }
+
+    #results-container {
+        width: min-content;
+        margin: 0 auto;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+
+    #search-form {
+        height: 150px;
+        flex-wrap: wrap;
+        justify-content: center;
     }
 }
 

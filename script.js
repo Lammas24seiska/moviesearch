@@ -1,4 +1,6 @@
-document.addEventListener("DOMContentLoaded", () => {
+
+function initVisualChangeListeners() {
+    // Change language select flag based on selected option
     const languageSelect = document.getElementById("language");
 
     languageSelect.addEventListener("change", (event) => {
@@ -18,6 +20,7 @@ document.addEventListener("DOMContentLoaded", () => {
     languageSelect.style.backgroundPosition = "right 15px center";
     languageSelect.style.backgroundSize = "20px 20px";
 
+    // Change sort direction button icon based on value
     const sortDirectionButton = document.getElementById('sort-direction');
     if (sortDirectionButton) {
         sortDirectionButton.addEventListener('click', () => {
@@ -26,5 +29,19 @@ document.addEventListener("DOMContentLoaded", () => {
             sortDirectionButton.textContent = sortDirectionButton.value === 'asc' ? '↑' : '↓';
         });
     }
+}
 
-});
+function displayMovieOverlay() {
+    document.getElementById("movie-detail-overlay").classList.add("active");
+}
+
+function hideMovieOverlay() {
+    document.getElementById("movie-detail-overlay").classList.remove("active");
+}
+
+
+// Code that runs when the page is loaded
+initVisualChangeListeners();
+
+
+

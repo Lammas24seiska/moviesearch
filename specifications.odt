@@ -12,7 +12,6 @@ The Movie Search App allows users to search for movies using the OMDB API. Users
 ### 2. Filter Search Results
 - Provide filters for:
   - Year of release.
-  - Genre.
   - Type (movie, series, episode).
 
 ### 3. Movie Details
@@ -38,6 +37,9 @@ The Movie Search App allows users to search for movies using the OMDB API. Users
 ### 6. Responsive Design
 - Ensure the app is fully responsive and works on smaller screens (e.g., mobile devices).
 - Use a mobile-first design approach.
+
+### 7. Favorites saved to local storage
+- Make sure that the user saved favorites and other categories are saved to localStorage to store between sessions.
 
 ## Technical Requirements
 
