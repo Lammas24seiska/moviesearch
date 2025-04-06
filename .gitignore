@@ -1,0 +1,11 @@
+# VSCode settings
+.vscode/
+
+# OS-specific files
+.DS_Store          # macOS
+Thumbs.db          # Windows
+
+# Temporary files created by editors or the OS
+*.swp              # Vim swap files
+*.swo              # Vim backup files
+*~                 # Other backup files
