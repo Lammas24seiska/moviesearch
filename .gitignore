@@ -9,3 +9,9 @@ Thumbs.db          # Windows
 *.swp              # Vim swap files
 *.swo              # Vim backup files
 *~                 # Other backup files
+
+# Environment variables
+.env
+
+# Test files
+test_image.jpg

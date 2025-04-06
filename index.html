@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Movie Search</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="script.js" defer></script>
+</head>
+<body>
+    <header>
+        <h1>FlickHunt</h1>
+        <form id="search-form" action="#" method="GET">
+            <div class="search-bar">
+                <select title="Data source" id="data-source" name="source">
+                    <option value="imdb">IMDB</option>
+                    <option value="favorites">Favorites</option>
+                    <option value="add-new-source" id="new">+</option>
+                </select>
+                <input type="text" id="search-input" placeholder="Search for a movie..." required>
+                <button title="search" type="submit"><img src="images/search.png" alt="search"></button>
+            </div>
+            <select title="Content type" id="search-type" name="type">
+                <option value="all">All</option>
+                <option value="movie">Movies</option>
+                <option value="series">Series</option>
+                <option value="episode">Episodes</option>
+            </select>
+            <select title="Language" id="language" name="language">
+                <option value="en">Eng</option>
+                <option value="fi">Fi</option>
+            </select>
+        </form>
+    </header>
+    <main>
+        <div id="main-header">
+            <h2>Search results for: "Avatar"</h2>
+            <div id="filter-container">
+                <select title="Sort by" id="sort-by" name="sort">
+                    <option value="year">Title</option>
+                    <option value="rating">Release year</option>
+                </select>
+                <button type="button" id="sort-direction" title="Sort direction" value="asc">↑</button>
+            </div>
+        </div>
+        <div id="result-area">
+            <div id="results-container" class="grid"> <!--grid/lines-->
+                <div class="result">
+                    <h3>Avatar</h3>
+                    <img src=".\test_image.jpg" alt="Avatar poster">
+                    <p>Release year: 2009</p>
+                    <button type="button" class="add-favorite">+</button>
+                </div>
+                <div class="result">
+                    <h3>Avatar 2</h3>
+                    <img src=".\test_image.jpg" alt="Avatar poster">
+                    <p>Release year: 2019</p>
+                    <button type="button" class="add-favorite">+</button>
+                </div>
+                <div class="result">
+                    <h3>Avatar 3</h3>
+                    <img src=".\test_image.jpg" alt="Avatar poster">
+                    <p>Release year: 2019</p>
+                    <button type="button" class="add-favorite">+</button>
+                </div>
+                <div class="result">
+                    <h3>Avatar</h3>
+                    <img src=".\test_image.jpg" alt="Avatar poster">
+                    <p>Release year: 2009</p>
+                    <button type="button" class="add-favorite">+</button>
+                </div>
+                <div class="result">
+                    <h3>Avatar 2</h3>
+                    <img src=".\test_image.jpg" alt="Avatar poster">
+                    <p>Release year: 2019</p>
+                    <button type="button" class="add-favorite">+</button>
+                </div>
+                <div class="result">
+                    <h3>Avatar 3</h3>
+                    <img src=".\test_image.jpg" alt="Avatar poster">
+                    <p>Release year: 2019</p>
+                    <button type="button" class="add-favorite">+</button>
+                </div>
+                <div class="result">
+                    <h3>Avatar</h3>
+                    <img src=".\test_image.jpg" alt="Avatar poster">
+                    <p>Release year: 2009</p>
+                    <button type="button" class="add-favorite">+</button>
+                </div>
+                <div class="result">
+                    <h3>Avatar 2</h3>
+                    <img src=".\test_image.jpg" alt="Avatar poster">
+                    <p>Release year: 2019</p>
+                    <button type="button" class="add-favorite">+</button>
+                </div>
+                <div class="result">
+                    <h3>Avatar 3</h3>
+                    <img src=".\test_image.jpg" alt="Avatar poster">
+                    <p>Release year: 2019</p>
+                    <button type="button" class="add-favorite">+</button>
+                </div>
+                <div class="result">
+                    <h3>Avatar</h3>
+                    <img src=".\test_image.jpg" alt="Avatar poster">
+                    <p>Release year: 2009</p>
+                    <button type="button" class="add-favorite">+</button>
+                </div>
+                <div class="result">
+                    <h3>Avatar 2</h3>
+                    <img src=".\test_image.jpg" alt="Avatar poster">
+                    <p>Release year: 2019</p>
+                    <button type="button" class="add-favorite">+</button>
+                </div>
+                <div class="result">
+                    <h3>Avatar 3</h3>
+                    <img src=".\test_image.jpg" alt="Avatar poster">
+                    <p>Release year: 2019</p>
+                    <button type="button" class="add-favorite">+</button>
+                </div>
+                <div class="result">
+                    <h3>Avatar</h3>
+                    <img src=".\test_image.jpg" alt="Avatar poster">
+                    <p>Release year: 2009</p>
+                    <button type="button" class="add-favorite">+</button>
+                </div>
+                <div class="result">
+                    <h3>Avatar 2</h3>
+                    <img src=".\test_image.jpg" alt="Avatar poster">
+                    <p>Release year: 2019</p>
+                    <button type="button" class="add-favorite">+</button>
+                </div>
+                <div class="result">
+                    <h3>Avatar 3</h3>
+                    <img src=".\test_image.jpg" alt="Avatar poster">
+                    <p>Release year: 2019</p>
+                    <button type="button" class="add-favorite">+</button>
+                </div>
+                <div class="result">
+                    <h3>Avatar</h3>
+                    <img src=".\test_image.jpg" alt="Avatar poster">
+                    <p>Release year: 2009</p>
+                    <button type="button" class="add-favorite">+</button>
+                </div>
+                <div class="result">
+                    <h3>Avatar 2</h3>
+                    <img src=".\test_image.jpg" alt="Avatar poster">
+                    <p>Release year: 2019</p>
+                    <button type="button" class="add-favorite">+</button>
+                </div>
+                <div class="result">
+                    <h3>Avatar 3</h3>
+                    <img src=".\test_image.jpg" alt="Avatar poster">
+                    <p>Release year: 2019</p>
+                    <button type="button" class="add-favorite">+</button>
+                </div>
+            </div>
+        </div>
+        <button type="button" id="see-more">See more results</button>
+    </main>
+    <footer>
+        <p>&copy; 2025 FlickHunt by Aarni Akkala. Powered by: OMDB API</p>
+    </footer>
+</body>
+</html>

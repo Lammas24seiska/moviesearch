@@ -1,0 +1,362 @@
+* {
+    box-sizing: border-box;
+}
+
+html, body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f0f8ff;
+    color: #2c3e50;
+    overflow: hidden;
+    max-width: 100vw;
+    height: 100vh;
+}
+
+header, main, footer {
+    width: 100%;
+}
+
+header {
+    background-color: #3498db;
+    padding: 10px 20px;
+    height: 50px;
+    display: flex;
+    flex-direction: row;
+    gap: 50px;
+    align-items: center;
+    justify-content: space-between;
+}
+
+header h1 {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    min-width: 0;
+    flex-shrink: 0;
+}
+
+header form {
+    width: fit-content;;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+    flex-wrap: nowrap;
+    overflow: hidden;
+}
+
+.search-bar {
+    flex-grow: 1;
+    height: 40px;
+    max-width: 400px;
+    display: flex;
+    align-items: center;
+    border: 1px solid #525557;
+    background-color: rgb(255, 255, 255, 0.5);
+    border-radius: 20px;
+    padding: 10px 20px 10px 0px;
+    min-width: 275px;
+}
+
+.search-bar select {
+    max-width: 130px;
+    border: 0;
+    outline: 0;
+    background: transparent;
+}
+
+.search-bar select:hover {
+    background: transparent;
+    cursor: pointer;
+    color: #000000;
+    font-style: bold;
+}
+
+.search-bar select option {
+    background: transparent;
+    color: #000000;
+    font-style: bold;
+    font-size: 14px;
+}
+
+.search-bar select option[id="new"] {
+    background: rgb(119, 212, 119);
+    color: #000000;
+}
+
+
+.search-bar input {
+    background: transparent;
+    flex: 1; 
+    border: 0;
+    outline: 0;
+    padding: 24px 20px;
+    font-size: 16px;
+    min-width: 0;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+.search-bar button {
+    background: transparent;
+    border: 0;
+    outline: 0;
+    cursor: pointer;
+    padding: 0;
+}
+
+.search-bar button img {
+    width: 20px;
+    height: 20px;
+    border: 0;
+    outline: 0;
+    background: transparent;
+}
+
+header form #filter-button,
+header form select {
+    flex-shrink: 0;
+    height: 40px;
+    border: 1px solid #525557;
+    background-color: rgb(255, 255, 255, 0.5);
+    border-radius: 20px;
+    padding: 0 20px;
+    font-size: 16px;
+    color: #2c3e50;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    outline: none;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+header form #filter-button:hover,
+header form select:hover {
+    background-color: #3498db;
+    color: #ffffff;
+}
+
+#language option img {
+    width: 20px;
+    height: 20px;
+    border: 0;
+    outline: 0;
+}
+
+#sort-direction {
+    height: 40px;
+    border: 1px solid #525557;
+    background-color: rgb(255, 255, 255, 0.5);
+    border-radius: 20px;
+    padding: 0 15px;
+    font-size: 16px;
+    color: #2c3e50;
+    cursor: pointer;
+    outline: none;
+    text-align: center;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+#sort-direction:hover {
+    background-color: #3498db;
+    color: #ffffff;
+}
+
+main {
+    height: calc(100vh - 120px);
+    display: flex;
+    flex-direction: column;
+    overflow: auto; 
+    gap: 10px;
+    margin: 10px 0;
+}
+
+#main-header {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+}
+
+#main-header select {
+    height: 40px;
+    border: 1px solid #525557;
+    background-color: rgb(255, 255, 255, 0.5);
+    border-radius: 20px;
+    padding: 0 15px;
+    font-size: 16px;
+    color: #2c3e50;
+    cursor: pointer;
+    outline: none;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+#main-header select:hover {
+    background-color: #3498db;
+    color: #ffffff;
+}
+
+#main-header select option {
+    background-color: #ffffff;
+    color: #2c3e50;
+    font-size: 14px;
+}
+
+main h2 {
+    font-size: 1.5em;
+    text-align: center;
+    margin: 5px 0;
+}
+
+#results-container.grid {
+    width: auto;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    padding: 0 0 0 20px;
+    gap: 10px;
+}
+
+.result {
+    width: 250px;
+    height: 450px;
+    background-color: #ecf0f1;
+    color: #34495e;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    gap: 0px;
+}
+
+.result img {
+    width: 100%;
+    height: auto;
+    order: -1;
+    margin: 0;
+    padding: 0;
+}
+
+.result h3 {
+    font-size: 1.3em;
+    order: 0;
+    margin: 5px 0 5px 0;
+    padding: 0;
+}
+
+.result p {
+    font-size: 1em;
+    order: 1;
+    margin: 0;
+    padding: 0;
+}
+
+.result button {
+    border-radius: 25%;
+    width:30px;
+    height: 30px;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background-color: #3498db;
+    color: #ffffff;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.result button:hover {
+    background-color: #2980b9;
+    transform: scale(1.1);
+}
+
+.result button:active {
+    transform: scale(0.95);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+}
+
+#see-more {
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+#see-more:hover {
+    background-color: #0056b3;
+}
+
+
+footer {
+    overflow: hidden;
+    bottom: 0;
+    width: 100%;
+    height: 50px;
+    background-color: #3498db;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
+    color: #ffffff;
+}
+
+@media all and (max-width: 882px) {
+    header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0px;
+        height: 100px;;
+    }
+
+    main {
+        height: calc(100vh - 170px);
+    }
+
+    header h1 {
+        width: 100%;
+        text-align: center;
+        margin: 0;
+    }
+
+    header form {
+        width: 100%;
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-start;
+        align-items: center;
+        gap: 10px;
+    }
+
+    @media all and (max-width: 560px) {
+        #results-container {
+            width: min-content;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        #search-form {
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+    }
+}
+
+
