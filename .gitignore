@@ -11,7 +11,8 @@ Thumbs.db          # Windows
 *~                 # Other backup files
 
 # Environment variables
-.env
+env.js
 
 # Test files
 test_image.jpg
+test*
