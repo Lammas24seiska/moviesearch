@@ -2,6 +2,10 @@
     box-sizing: border-box;
 }
 
+.hidden {
+    display: none;
+}
+
 html, body {
     font-family: Arial, sans-serif;
     margin: 0;
@@ -152,13 +156,6 @@ header form select:hover {
     gap: 15px;
 }
 
-#language option img {
-    width: 20px;
-    height: 20px;
-    border: 0;
-    outline: 0;
-}
-
 #sort-direction {
     height: 40px;
     border: 1px solid #525557;
@@ -226,13 +223,34 @@ main h2 {
     margin: 5px 0;
 }
 
-#results-container.grid {
+#results-container {
     width: auto;
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
     padding: 0 0 0 20px;
     gap: 10px;
+}
+
+#welcome-card {
+    margin-top: 50px;
+}
+
+#welcome-card h2{
+    margin: 0;
+    padding: 0;
+    font-size: 4em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+#welcome-card p {
+    margin: 0;
+    padding: 0;
+    font-size: 2em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .result {
@@ -249,18 +267,32 @@ main h2 {
 }
 
 .result img {
-    width: 100%;
-    height: auto;
+    width: 250px;
+    height: 370px;;
     order: -1;
     margin: 0;
     padding: 0;
 }
 
 .result h3 {
+    height: 52px;
     font-size: 1.3em;
     order: 0;
     margin: 5px 0 5px 0;
     padding: 0;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    line-clamp: 2;
+    text-align: center;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.result h3:hover {
+    color: #1e70a7;
+    text-decoration: underline;
+    cursor: pointer;
 }
 
 .result p {
@@ -380,33 +412,34 @@ footer {
 #movie-details {
     display: grid;
     grid-template-columns: 300px 1fr 1fr;
-    grid-template-rows: 90px 132px 192px 100px;
+    grid-template-rows: 1.5fr 1fr 0.5fr;
     gap: 10px;
     padding: 10px;
 }
 
-#movie-details .poster-div {
+#movie-details #poster-div {
     grid-column: 1;
-    grid-row: 1 / 4;
+    grid-row: 1 / 2;
     position: relative;
-    height: fit-content;
-    width: fit-content;
     display: flex;
-    align-items: center;
+    flex-direction: column;
+    align-items: flex-start;
     justify-content: center;
+    object-fit: contain;
 }
 
-#movie-details .poster-div img {
-    width: auto;
+#movie-details #poster-div img {
+    width: 100%;
     height: 100%;
+    object-fit: contain;
 }
 
-#movie-details .poster-div button.add-favorite {
+#movie-details #poster-div button.add-favorite {
     top: 10px;
     left: 10px;
 }
 
-#movie-details .poster-div .rating-box {
+#movie-details #poster-div #rating-box {
     height: 30px;
     width: 70px;
     position: absolute;
@@ -422,9 +455,14 @@ footer {
     font-weight: bold;
 }
 
+#movie-details #poster-div #rating-box.hidden {
+    display: none;
+}
+
 #movie-details .title-div {
     grid-column: 2 / 4;
     grid-row: 1;
+    overflow: auto;
 }
 
 #movie-details .title-div .movie-genre,
@@ -438,22 +476,9 @@ footer {
     color: #2c3e50;
 }
 
-#movie-details .plot {
-    grid-column: 2 / 4;
-    grid-row: 2; 
-    margin: 0;
-    display: -webkit-box;
-    -webkit-line-clamp: 11;
-    line-clamp: 11;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    font-size: 11px;
-}
-
 #movie-details .cast-info {
     grid-column: 2;
-    grid-row: 3 / 5;
+    grid-row: 2 / 4;
 }
 
 #movie-details .cast-info p, #movie-details .cast-info ul {
@@ -462,7 +487,7 @@ footer {
 
 #movie-details .num-info {
     grid-column: 3;
-    grid-row: 3 / 5;
+    grid-row: 2 / 4;
 }
 
 #movie-details .num-info p, #movie-details .num-info strong {
@@ -471,7 +496,7 @@ footer {
 
 #movie-details .rating-info {
     grid-column: 1;
-    grid-row: 4;
+    grid-row: 2 / 4;
 }
 
 #movie-details .rating-info p, #movie-details .rating-info ul {
@@ -486,7 +511,7 @@ path.filled {
     fill: yellow;
 }
 
-@media all and (max-width: 882px) {
+@media all and (max-width: 930px) {
     header {
         flex-direction: column;
         align-items: flex-start;
@@ -518,6 +543,61 @@ path.filled {
 
     .search-bar {
         flex-shrink: 1;
+    }
+
+    .overlay-card {
+        width: 80%;
+        height: 80%;
+        min-width: 390px;
+    }
+
+    
+    #movie-details {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: 1fr 1fr 1fr 0.5fr;
+        gap: 5px;
+        padding: 5px;
+        width: 100%;
+        height: 100%;
+        min-height: 660px;
+    }
+
+    #movie-details #poster-div {
+        grid-column: 1;
+        grid-row: 1/ 3;
+    }
+
+    #movie-details .title-div {
+        grid-column: 2;
+        grid-row: 1 / 3;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+    }
+
+    #movie-details .cast-info {
+        grid-column: 2;
+        grid-row: 3 / 5;
+    }
+
+    #movie-details .num-info {
+        grid-column: 1;
+        grid-row: 3 / 5;
+    }
+
+    #movie-details .num-info p, #movie-details .num-info strong {
+        margin: 5px;
+    }
+
+    #movie-details .rating-info {
+        grid-column: 1 / 3;
+        grid-row: 4;
+        display: flex;
+        flex-direction: column;
+        justify-content:flex-end;
+        align-items: center;
+        margin-bottom: 10px;
     }
 }
 

@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Movie Search</title>
     <link rel="stylesheet" href="styles.css">
-    <script src="script.js" defer></script>
+    <script type="module" src="script.js" defer></script>
 </head>
 <body>
     <header>
@@ -17,8 +17,8 @@
                     <option value="favorites">Favorites</option>
                     <option value="add-new-source" id="new">+</option>
                 </select>
-                <input type="text" id="search-input" placeholder="Search for a movie..." required>
-                <button title="search" type="submit"><img src="images/search.png" alt="search"></button>
+                <input type="text" autocomplete="off" id="search-input" placeholder="Search for a movie..." required>
+                <button id="search-button" title="search" type="submit"><img src="images/search.png" alt="search"></button>
             </div>
             <div id="search-options">
                 <select title="Content type" id="search-type" name="type">
@@ -26,170 +26,58 @@
                     <option value="movie">Movies</option>
                     <option value="series">Series</option>
                     <option value="episode">Episodes</option>
-                </select>
-                <select title="Language" id="language" name="language">
-                    <option value="en">ENG</option>
-                    <option value="fi">FI</option>
+                    <option value="game">Games</option>
                 </select>
             </div>
         </form>
     </header>
     <main>
         <div id="main-header">
-            <h2>Search results for: "Avatar"</h2>
-            <div id="filter-container">
-                <select title="Sort by" id="sort-by" name="sort">
-                    <option value="year">Title</option>
-                    <option value="rating">Release year</option>
-                </select>
-                <button type="button" id="sort-direction" title="Sort direction" value="asc">↑</button>
-            </div>
+            <h2 id="search-text" class="hidden">Search results for: "<span class="titletext"></span>"</h2>
+            <h2 id="no-results" class="hidden">No results for: "<span class="titletext"></span>"</h2>
         </div>
         <div id="result-area">
-            <div id="results-container" class="grid"> <!--grid/lines-->
-                <div class="result">
-                    <h3>Avatar</h3>
-                    <img src=".\test_image.jpg" alt="Avatar poster">
-                    <p>Release year: 2009</p>
-                    <button type="button" class="add-favorite">+</button>
-                </div>
-                <div class="result">
-                    <h3>Avatar 2</h3>
-                    <img src=".\test_image.jpg" alt="Avatar poster">
-                    <p>Release year: 2019</p>
-                    <button type="button" class="add-favorite">+</button>
-                </div>
-                <div class="result">
-                    <h3>Avatar 3</h3>
-                    <img src=".\test_image.jpg" alt="Avatar poster">
-                    <p>Release year: 2019</p>
-                    <button type="button" class="add-favorite">+</button>
-                </div>
-                <div class="result">
-                    <h3>Avatar</h3>
-                    <img src=".\test_image.jpg" alt="Avatar poster">
-                    <p>Release year: 2009</p>
-                    <button type="button" class="add-favorite">+</button>
-                </div>
-                <div class="result">
-                    <h3>Avatar 2</h3>
-                    <img src=".\test_image.jpg" alt="Avatar poster">
-                    <p>Release year: 2019</p>
-                    <button type="button" class="add-favorite">+</button>
-                </div>
-                <div class="result">
-                    <h3>Avatar 3</h3>
-                    <img src=".\test_image.jpg" alt="Avatar poster">
-                    <p>Release year: 2019</p>
-                    <button type="button" class="add-favorite">+</button>
-                </div>
-                <div class="result">
-                    <h3>Avatar</h3>
-                    <img src=".\test_image.jpg" alt="Avatar poster">
-                    <p>Release year: 2009</p>
-                    <button type="button" class="add-favorite">+</button>
-                </div>
-                <div class="result">
-                    <h3>Avatar 2</h3>
-                    <img src=".\test_image.jpg" alt="Avatar poster">
-                    <p>Release year: 2019</p>
-                    <button type="button" class="add-favorite">+</button>
-                </div>
-                <div class="result">
-                    <h3>Avatar 3</h3>
-                    <img src=".\test_image.jpg" alt="Avatar poster">
-                    <p>Release year: 2019</p>
-                    <button type="button" class="add-favorite">+</button>
-                </div>
-                <div class="result">
-                    <h3>Avatar</h3>
-                    <img src=".\test_image.jpg" alt="Avatar poster">
-                    <p>Release year: 2009</p>
-                    <button type="button" class="add-favorite">+</button>
-                </div>
-                <div class="result">
-                    <h3>Avatar 2</h3>
-                    <img src=".\test_image.jpg" alt="Avatar poster">
-                    <p>Release year: 2019</p>
-                    <button type="button" class="add-favorite">+</button>
-                </div>
-                <div class="result">
-                    <h3>Avatar 3</h3>
-                    <img src=".\test_image.jpg" alt="Avatar poster">
-                    <p>Release year: 2019</p>
-                    <button type="button" class="add-favorite">+</button>
-                </div>
-                <div class="result">
-                    <h3>Avatar</h3>
-                    <img src=".\test_image.jpg" alt="Avatar poster">
-                    <p>Release year: 2009</p>
-                    <button type="button" class="add-favorite">+</button>
-                </div>
-                <div class="result">
-                    <h3>Avatar 2</h3>
-                    <img src=".\test_image.jpg" alt="Avatar poster">
-                    <p>Release year: 2019</p>
-                    <button type="button" class="add-favorite">+</button>
-                </div>
-                <div class="result">
-                    <h3>Avatar 3</h3>
-                    <img src=".\test_image.jpg" alt="Avatar poster">
-                    <p>Release year: 2019</p>
-                    <button type="button" class="add-favorite">+</button>
-                </div>
-                <div class="result">
-                    <h3>Avatar</h3>
-                    <img src=".\test_image.jpg" alt="Avatar poster">
-                    <p>Release year: 2009</p>
-                    <button type="button" class="add-favorite">+</button>
-                </div>
-                <div class="result">
-                    <h3>Avatar 2</h3>
-                    <img src=".\test_image.jpg" alt="Avatar poster">
-                    <p>Release year: 2019</p>
-                    <button type="button" class="add-favorite">+</button>
-                </div>
-                <div class="result">
-                    <h3>Avatar 3</h3>
-                    <img src=".\test_image.jpg" alt="Avatar poster">
-                    <p>Release year: 2019</p>
-                    <button type="button" class="add-favorite">+</button>
-                </div>
+            <div id="welcome-card">
+                <h2>Welcome to FlickHunt!</h2>
+                <p>Search for your favorite movies, series, and episodes.</p>
+                <p>Click the search icon to get started!</p>
+            </div>
+            <div id="results-container">
+                <!--Results go here!-->
             </div>
         </div>
-        <button type="button" id="see-more">See more results</button>
+        <button type="button" id="see-more" class="hidden">See more results</button>
     </main>
     <footer>
         <p>&copy; 2025 FlickHunt by Aarni Akkala. Powered by: OMDB API</p>
     </footer>
-    <div id="movie-detail-overlay" class="active">
-        <div id="movie-card" class="overlay-card">                                <!--temp: remove-->
+    <div id="movie-detail-overlay">
+        <div id="movie-card" class="overlay-card">                               
             <div button type="button" class="close-button" title="Close details" onClick="hideMovieOverlay()">X</div>
             <div id="movie-details">
-                <div class="poster-div">
-                    <img src="https://m.media-amazon.com/images/M/MV5BMDEzMmQwZjctZWU2My00MWNlLWE0NjItMDJlYTRlNGJiZjcyXkEyXkFqcGc@._V1_SX300.jpg" alt="Avatar Poster">
-                    <div class="rating-box">PG-13</div>
+                <div id="poster-div">
+                    <img class="detail-poster" src="" alt=""></img>
+                    <div id="rating-box"></div>
                     <button type="button" class="add-favorite">+</button>
                 </div>
                 <div class="title-div">
-                    <h2 class="movie-title">Avatar (2009)<small> movie</small></h2>
-                    <p class="movie-genre"><strong>Genre:</strong> Action, Adventure, Fantasy</p>
-                    
-                    <div class="rating">
+                    <h2 class="movie-title"></h2>
+                    <p class="movie-genre"></p>
+                    <div id="rating">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24">
-                            <path class="filled" d="M12 17.27l4.15 2.51c.76.46 1.69-.22 1.49-1.08l-1.1-4.72 3.67-3.18c.67-.58.31-1.68-.57-1.75l-4.83-.41-1.89-4.46c-.34-.81-1.5-.81-1.84 0L9.19 8.63l-4.83.41c-.88.07-1.24 1.17-.57 1.75l3.67 3.18-1.1 4.72c-.2.86.73 1.54 1.49 1.08l4.15-2.5z"></path>
+                            <path d="M12 17.27l4.15 2.51c.76.46 1.69-.22 1.49-1.08l-1.1-4.72 3.67-3.18c.67-.58.31-1.68-.57-1.75l-4.83-.41-1.89-4.46c-.34-.81-1.5-.81-1.84 0L9.19 8.63l-4.83.41c-.88.07-1.24 1.17-.57 1.75l3.67 3.18-1.1 4.72c-.2.86.73 1.54 1.49 1.08l4.15-2.5z"></path>
                         </svg>
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24">
-                            <path class="filled" d="M12 17.27l4.15 2.51c.76.46 1.69-.22 1.49-1.08l-1.1-4.72 3.67-3.18c.67-.58.31-1.68-.57-1.75l-4.83-.41-1.89-4.46c-.34-.81-1.5-.81-1.84 0L9.19 8.63l-4.83.41c-.88.07-1.24 1.17-.57 1.75l3.67 3.18-1.1 4.72c-.2.86.73 1.54 1.49 1.08l4.15-2.5z"></path>
+                            <path d="M12 17.27l4.15 2.51c.76.46 1.69-.22 1.49-1.08l-1.1-4.72 3.67-3.18c.67-.58.31-1.68-.57-1.75l-4.83-.41-1.89-4.46c-.34-.81-1.5-.81-1.84 0L9.19 8.63l-4.83.41c-.88.07-1.24 1.17-.57 1.75l3.67 3.18-1.1 4.72c-.2.86.73 1.54 1.49 1.08l4.15-2.5z"></path>
                         </svg>
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24">
-                            <path class="filled" d="M12 17.27l4.15 2.51c.76.46 1.69-.22 1.49-1.08l-1.1-4.72 3.67-3.18c.67-.58.31-1.68-.57-1.75l-4.83-.41-1.89-4.46c-.34-.81-1.5-.81-1.84 0L9.19 8.63l-4.83.41c-.88.07-1.24 1.17-.57 1.75l3.67 3.18-1.1 4.72c-.2.86.73 1.54 1.49 1.08l4.15-2.5z"></path>
+                            <path d="M12 17.27l4.15 2.51c.76.46 1.69-.22 1.49-1.08l-1.1-4.72 3.67-3.18c.67-.58.31-1.68-.57-1.75l-4.83-.41-1.89-4.46c-.34-.81-1.5-.81-1.84 0L9.19 8.63l-4.83.41c-.88.07-1.24 1.17-.57 1.75l3.67 3.18-1.1 4.72c-.2.86.73 1.54 1.49 1.08l4.15-2.5z"></path>
                         </svg>
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24">
-                            <path class="filled" d="M12 17.27l4.15 2.51c.76.46 1.69-.22 1.49-1.08l-1.1-4.72 3.67-3.18c.67-.58.31-1.68-.57-1.75l-4.83-.41-1.89-4.46c-.34-.81-1.5-.81-1.84 0L9.19 8.63l-4.83.41c-.88.07-1.24 1.17-.57 1.75l3.67 3.18-1.1 4.72c-.2.86.73 1.54 1.49 1.08l4.15-2.5z"></path>
+                            <path d="M12 17.27l4.15 2.51c.76.46 1.69-.22 1.49-1.08l-1.1-4.72 3.67-3.18c.67-.58.31-1.68-.57-1.75l-4.83-.41-1.89-4.46c-.34-.81-1.5-.81-1.84 0L9.19 8.63l-4.83.41c-.88.07-1.24 1.17-.57 1.75l3.67 3.18-1.1 4.72c-.2.86.73 1.54 1.49 1.08l4.15-2.5z"></path>
                         </svg>
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24">
-                            <path class="filled" d="M12 17.27l4.15 2.51c.76.46 1.69-.22 1.49-1.08l-1.1-4.72 3.67-3.18c.67-.58.31-1.68-.57-1.75l-4.83-.41-1.89-4.46c-.34-.81-1.5-.81-1.84 0L9.19 8.63l-4.83.41c-.88.07-1.24 1.17-.57 1.75l3.67 3.18-1.1 4.72c-.2.86.73 1.54 1.49 1.08l4.15-2.5z"></path>
+                            <path d="M12 17.27l4.15 2.51c.76.46 1.69-.22 1.49-1.08l-1.1-4.72 3.67-3.18c.67-.58.31-1.68-.57-1.75l-4.83-.41-1.89-4.46c-.34-.81-1.5-.81-1.84 0L9.19 8.63l-4.83.41c-.88.07-1.24 1.17-.57 1.75l3.67 3.18-1.1 4.72c-.2.86.73 1.54 1.49 1.08l4.15-2.5z"></path>
                         </svg>
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24">
                             <path d="M12 17.27l4.15 2.51c.76.46 1.69-.22 1.49-1.08l-1.1-4.72 3.67-3.18c.67-.58.31-1.68-.57-1.75l-4.83-.41-1.89-4.46c-.34-.81-1.5-.81-1.84 0L9.19 8.63l-4.83.41c-.88.07-1.24 1.17-.57 1.75l3.67 3.18-1.1 4.72c-.2.86.73 1.54 1.49 1.08l4.15-2.5z"></path>
@@ -207,40 +95,37 @@
                             <path d="M12 17.27l4.15 2.51c.76.46 1.69-.22 1.49-1.08l-1.1-4.72 3.67-3.18c.67-.58.31-1.68-.57-1.75l-4.83-.41-1.89-4.46c-.34-.81-1.5-.81-1.84 0L9.19 8.63l-4.83.41c-.88.07-1.24 1.17-.57 1.75l3.67 3.18-1.1 4.72c-.2.86.73 1.54 1.49 1.08l4.15-2.5z"></path>
                         </svg>
                     </div>
+                    <p class="plot"></p>
                 </div>
-                <p class="plot"><strong>Plot: </strong>When his brother is killed in a robbery, paraplegic Marine Jake Sully decides to take his place in a mission on the distant world of Pandora. There he learns of greedy corporate figurehead Parker Selfridge's intentions of driving off the native humanoid "Na'vi" in order to mine for the precious material scattered throughout their rich woodland. In exchange for the spinal surgery that will fix his legs, Jake gathers knowledge, of the Indigenous Race and their Culture, for the cooperating military unit spearheaded by gung-ho Colonel Quaritch, while simultaneously attempting to infiltrate the Na'vi people with the use of an "avatar" identity. While Jake begins to bond with the native tribe and quickly falls in love with the beautiful alien Neytiri, the restless Colonel moves forward with his ruthless extermination tactics, forcing the soldier to take a stand - and fight back in an epic battle for the fate of Pandora.</p>
                 <div class="cast-info">
                     <strong>Director:</strong>
-                    <p> - James Cameron</p>
+                    <p></p>
                     <strong>Writer:</strong>
-                    <p> - James Cameron</p>
+                    <p></p>
                     <strong>Stars:</strong>
                     <p>
-                        - Sam Worthington<br>
-                        - Zoe Saldaña<br>
-                        - Sigourney Weaver<br>
                     </p>
                     <strong>Awards:</strong>
-                    <p>Won 3 Oscars. 91 wins & 131 nominations total</p>
+                    <p></p>
                 </div>
                 <div class="num-info">
                     <strong>Released:</strong>
-                    <p>18 Dec 2009</p>
+                    <p></p>
                     <strong>Runtime:</strong>
-                    <p>162 min</p>
+                    <p></p>
                     <strong>Language:</strong>
-                    <p>English, Spanish</p>
+                    <p></p>
                     <strong>Country:</strong>
-                    <p>United States, United Kingdom</p>
+                    <p></p>
                     <strong>Box Office:</strong>
-                    <p>$785,221,649</p>
+                    <p></p>
                 </div>
                 <div class="rating-info">
                     <p><strong>Ratings:</strong></p>
                     <ul>
-                        <li>Internet Movie Database: 7.9/10</li>
-                        <li>Rotten Tomatoes: 81%</li>
-                        <li>Metacritic: 83/100</li>
+                        <li></li>
+                        <li></li>
+                        <li></li>
                     </ul>
                 </div>
             </div>
