@@ -41,6 +41,6 @@ export async function fetchDataBySearch(searchTerm, pageNum, type="all") {
 // Precondition: -
 // Postcondition: returns a promise that resolves to an object containing the data or an error message
 export async function fetchDataById(id) {
-    const data = fetchByUrl(`${API_URL}?apikey=${API_KEY}&i=${id}`)
+    const data = fetchByUrl(`${API_URL}?apikey=${API_KEY}&i=${id}&plot=full`);
     return data;
 }

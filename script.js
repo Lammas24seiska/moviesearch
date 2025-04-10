@@ -1,5 +1,17 @@
 
-import { searchMovies, moreSearchResults, getMovieDetails } from "./service.js";
+import { 
+    searchMovies, 
+    moreSearchResults, 
+    searchCategoryMovies, 
+    moreCategoryMovies, 
+    addToCategory, 
+    removeFromCategory, 
+    getCategories, 
+    addCategory, 
+    removeCategory, 
+    movieExistsInCategory, 
+    getMovieDetails 
+} from './service.js';
 
 // Select all text in the input field when it is clicked on
 document.getElementById("search-input").addEventListener("focus", function () {
@@ -42,7 +54,6 @@ function editMovieOverlay(data) {
     } else {
         posterDiv.children[1].classList.add("hidden");
     }
-    posterDiv.children[2].id = data.Id;
 
     const titleDiv = detailDiv.children[1];
     titleDiv.children[0].innerText = data.Title + " (" + data.Year + ")";
@@ -87,15 +98,21 @@ function editMovieOverlay(data) {
 // Create search result DOM elements based on data
 // movies: the list of movies to display
 // erase: whether to erase the previous search results or not
-function createDOMElementsForSearchResults(movies, erase=true) {
+function createDOMElementsForSearchResults(movies, erase=true, hideExistingFavorites=true) {
     const searchResultsContainer = document.getElementById("results-container");
     if (erase) searchResultsContainer.innerHTML = "";
 
+    // get all 
+
     // Create dom element for each movie and append it to the search results container
+    if (movies ==undefined) {return;}
     movies.forEach((movie) => {
         const movieCard = document.createElement("div");
         movieCard.className = "result";
         movieCard.id = movie.Id;
+        const hidden = hideExistingFavorites ? (movieExistsInCategory(movie.Id, "favorites") ? "hidden" : "") : "";
+        const buttonText = movieExistsInCategory(movie.Id, "favorites") ? "-" : "+";
+        const buttonClass = movieExistsInCategory(movie.Id, "favorites") ? "remove-favorite" : "add-favorite";
         movieCard.innerHTML = `
             <h3>${movie.Title}</h3>
             <img 
@@ -105,7 +122,7 @@ function createDOMElementsForSearchResults(movies, erase=true) {
                 onerror="this.src='https://upload.wikimedia.org/wikipedia/commons/thumb/6/65/No-Image-Placeholder.svg/330px-No-Image-Placeholder.svg.png?20200912122019'; this.alt='Image not available';"
             >
             <p>${movie.Year}</p>
-            <button type="button" class="add-favorite">+</button>
+            <button type="button" class="${buttonClass} ${hidden}">${buttonText}</button>
         `;
         searchResultsContainer.appendChild(movieCard);
     });
@@ -155,16 +172,18 @@ searchForm.addEventListener("submit", async (e) => {
     const source = document.getElementById("data-source").value;
     let result;
     const type = document.getElementById("search-type").value;
+    let hideExistingFavorites = true;
     if (source === "imdb") {
         result = await searchMovies(searchTerm, type);
         if (result.error) {
             result = {data: [], message: "No results found"};
         }
     } else {
-        result = await searchCategoryMovies(searchTerm, type, source)
+        result = searchCategoryMovies(searchTerm, type, source)
+        hideExistingFavorites = false;
     }
         
-    createDOMElementsForSearchResults(result.data);
+    createDOMElementsForSearchResults(result.data, true, hideExistingFavorites);
     changeTitleText(searchTerm);
 
     if (result.data.length < 10) {
@@ -177,11 +196,32 @@ searchForm.addEventListener("submit", async (e) => {
 });
 
 
-// TODO: Implement the function to add movie to favorites and remove it (CSS)
 // TODO: change all the element queries to use a saved variable instead of querying the DOM each time
+// TODO: User testing
 // TODO: unit tests
+// TODO: clean css
+// TODO: make readme file
 
+// event listener for the add-favorite button
+const resultsContainer = document.getElementById("results-container");
+resultsContainer.addEventListener("click", (e) => {
+    if (e.target.classList.contains("add-favorite")) {
+        const id = e.target.closest(".result").id;
+        addToCategory("favorites", id);
+        // hide the button
+        e.target.classList.add("hidden");
+    }
+});
 
+// event listener for the remove-favorite button
+resultsContainer.addEventListener("click", (e) => {
+    if (e.target.classList.contains("remove-favorite")) {
+        const id = e.target.closest(".result").id;
+        removeFromCategory("favorites", id);
+        // show the button
+        e.target.classList.add("hidden");
+    }
+});
 
 // Search more results with bottom button
 loadMoreButton.addEventListener("click", async () => {
@@ -199,7 +239,6 @@ loadMoreButton.addEventListener("click", async () => {
 });
 
 // Show movie details when clicked
-const resultsContainer = document.getElementById("results-container");
 resultsContainer.addEventListener("click", async (e) => {
     const movie = e.target.closest(".result");
     if (movie && e.target.tagName !== "BUTTON") {
