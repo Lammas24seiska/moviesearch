@@ -15,6 +15,8 @@ Features:
 
 -Website is responsive to screen size (works on both mobile and pc screen sizes)
 
+-Favorites are saved over sessions (stored in localstorage)
+
 Technical info:
 -Javascript (vanilla)
 -Run with VS code live server
